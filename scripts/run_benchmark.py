@@ -39,7 +39,7 @@ def build_model_config(args: argparse.Namespace, config_data: Dict) -> Dict:
     Builds the model config from commandline arguments and configuration dict
     """
     model_config = config_data.get("model_config", None)
-
+    
     if args.adapter is not None:
         args.adapter = [None if item == "None" else item for item in args.adapter]
         if len(args.model_name) > len(args.adapter):
@@ -65,7 +65,7 @@ def build_model_config(args: argparse.Namespace, config_data: Dict) -> Dict:
             {
                 "adapter": adapter,
                 "model_name": model_name,
-                "model_hyper_params": json.loads(model_hyper_params)
+                "model_hyper_params": json.loads(model_hyper_params,strict=True)
                 if model_hyper_params is not None
                 else {},
             }
